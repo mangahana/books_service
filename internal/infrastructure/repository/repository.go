@@ -12,7 +12,9 @@ import (
 type Repository interface {
 	// db connection close
 	Close()
+
 	GetTypes(c context.Context) ([]models.BookType, error)
+	GetGenres(c context.Context) ([]models.Genre, error)
 }
 
 type repo struct {

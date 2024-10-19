@@ -38,4 +38,5 @@ func (h *HttpServer) Register() {
 	api := h.server.Group("/api/v1/books")
 
 	api.GET("/types", controller.GetTypes)
+	api.GET("/genres", controller.GetGenres)
 }

@@ -8,6 +8,7 @@ import (
 
 type UseCase interface {
 	GetTypes(c context.Context) ([]models.BookType, error)
+	GetGenres(c context.Context) ([]models.Genre, error)
 }
 
 type useCase struct {
