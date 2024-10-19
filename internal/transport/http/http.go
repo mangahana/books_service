@@ -2,6 +2,7 @@ package http
 
 import (
 	"books_service/internal/application"
+	"books_service/internal/transport/http/controller"
 	"context"
 
 	"github.com/labstack/echo/v4"
@@ -32,6 +33,9 @@ func (h *HttpServer) Register() {
 	h.server.Use(middleware.CORS())
 	h.server.Use(middleware.BodyLimit("10M"))
 
-	// controller := controller.New(h.useCase)
-	// api := h.server.Group("/api/v1/books")
+	controller := controller.New(h.useCase)
+
+	api := h.server.Group("/api/v1/books")
+
+	api.GET("/types", controller.GetTypes)
 }

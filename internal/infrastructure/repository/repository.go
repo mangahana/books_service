@@ -2,6 +2,7 @@ package repository
 
 import (
 	"books_service/internal/core/configuration"
+	"books_service/internal/core/models"
 	"context"
 	"fmt"
 
@@ -11,7 +12,7 @@ import (
 type Repository interface {
 	// db connection close
 	Close()
-	//
+	GetTypes(c context.Context) ([]models.BookType, error)
 }
 
 type repo struct {
