@@ -7,6 +7,8 @@ import (
 )
 
 type UseCase interface {
+	GetOneByLink(c context.Context, bookLink string) (models.OneBook, error)
+
 	GetBooks(c context.Context) ([]models.Book, error)
 	GetTypes(c context.Context) ([]models.BookType, error)
 	GetPersons(c context.Context) ([]models.Person, error)
