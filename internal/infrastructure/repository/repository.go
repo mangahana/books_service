@@ -14,6 +14,7 @@ type Repository interface {
 	Close()
 
 	GetTypes(c context.Context) ([]models.BookType, error)
+	GetPersons(c context.Context) ([]models.Person, error)
 	GetGenres(c context.Context) ([]models.Genre, error)
 }
 
