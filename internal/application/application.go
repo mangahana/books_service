@@ -10,6 +10,7 @@ type UseCase interface {
 	GetTypes(c context.Context) ([]models.BookType, error)
 	GetPersons(c context.Context) ([]models.Person, error)
 	GetGenres(c context.Context) ([]models.Genre, error)
+	GetStatuses(c context.Context) ([]models.Status, error)
 }
 
 type useCase struct {

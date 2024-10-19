@@ -40,4 +40,5 @@ func (h *HttpServer) Register() {
 	api.GET("/types", controller.GetTypes)
 	api.GET("/persons", controller.GetPersons)
 	api.GET("/genres", controller.GetGenres)
+	api.GET("/statuses", controller.GetStatuses)
 }
