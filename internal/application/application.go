@@ -7,6 +7,7 @@ import (
 )
 
 type UseCase interface {
+	GetBooks(c context.Context) ([]models.Book, error)
 	GetTypes(c context.Context) ([]models.BookType, error)
 	GetPersons(c context.Context) ([]models.Person, error)
 	GetGenres(c context.Context) ([]models.Genre, error)
