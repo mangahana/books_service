@@ -3,6 +3,7 @@ package main
 import (
 	"books_service/internal/application"
 	"books_service/internal/core/configuration"
+	"books_service/internal/infrastructure/auth_service"
 	"books_service/internal/infrastructure/repository"
 	"books_service/internal/transport/http"
 	"context"
@@ -24,9 +25,10 @@ func main() {
 		log.Fatal(err)
 	}
 
+	authService := auth_service.New()
 	useCase := application.New(repo)
 
-	httpServer := http.New(useCase)
+	httpServer := http.New(useCase, authService)
 	httpServer.Register()
 	go httpServer.ListenAndServe(cfg.Server.HttpSocket)
 

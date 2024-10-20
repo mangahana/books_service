@@ -2,6 +2,7 @@ package http
 
 import (
 	"books_service/internal/application"
+	"books_service/internal/infrastructure"
 	"books_service/internal/transport/http/controller"
 	"context"
 
@@ -9,32 +10,36 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 )
 
-type HttpServer struct {
+type httpServer struct {
 	server  *echo.Echo
 	useCase application.UseCase
+
+	authService infrastructure.AuthService
 }
 
-func New(useCase application.UseCase) *HttpServer {
-	return &HttpServer{
-		server:  echo.New(),
-		useCase: useCase,
+func New(useCase application.UseCase, authService infrastructure.AuthService) *httpServer {
+	return &httpServer{
+		server:      echo.New(),
+		useCase:     useCase,
+		authService: authService,
 	}
 }
 
-func (h *HttpServer) ListenAndServe(socket string) {
+func (h *httpServer) ListenAndServe(socket string) {
 	h.server.Start(socket)
 }
 
-func (h *HttpServer) Shutdown(ctx context.Context) error {
+func (h *httpServer) Shutdown(ctx context.Context) error {
 	return h.server.Shutdown(ctx)
 }
 
-func (h *HttpServer) Register() {
+func (h *httpServer) Register() {
 	h.server.Use(middleware.CORS())
 	h.server.Use(middleware.BodyLimit("10M"))
 
 	controller := controller.New(h.useCase)
 
+	//
 	api := h.server.Group("/api/v1/books")
 
 	api.GET("", controller.GetBooks)
@@ -44,4 +49,9 @@ func (h *HttpServer) Register() {
 	api.GET("/persons", controller.GetPersons)
 	api.GET("/genres", controller.GetGenres)
 	api.GET("/statuses", controller.GetStatuses)
+
+	//
+	private := api.Group("", h.authenticateMiddleware)
+
+	private.POST("", controller.AddBook)
 }
