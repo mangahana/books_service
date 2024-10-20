@@ -6,7 +6,7 @@ import (
 )
 
 func (r *repo) GetStatuses(c context.Context) ([]models.Status, error) {
-	var output []models.Status
+	output := []models.Status{}
 	sql := "SELECT id, name FROM statuses;"
 
 	rows, err := r.db.Query(c, sql)

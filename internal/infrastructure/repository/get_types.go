@@ -6,21 +6,21 @@ import (
 )
 
 func (r *repo) GetTypes(c context.Context) ([]models.BookType, error) {
-	var bookTypes []models.BookType
+	output := []models.BookType{}
 
 	sql := "SELECT id, name FROM types;"
 	rows, err := r.db.Query(c, sql)
 	if err != nil {
-		return bookTypes, err
+		return output, err
 	}
 
 	for rows.Next() {
-		var bookType models.BookType
-		if err := rows.Scan(&bookType.ID, &bookType.Name); err != nil {
-			return bookTypes, err
+		var t models.BookType
+		if err := rows.Scan(&t.ID, &t.Name); err != nil {
+			return output, err
 		}
-		bookTypes = append(bookTypes, bookType)
+		output = append(output, t)
 	}
 
-	return bookTypes, nil
+	return output, nil
 }

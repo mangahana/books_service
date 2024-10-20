@@ -6,7 +6,7 @@ import (
 )
 
 func (r *repo) GetGenres(c context.Context) ([]models.Genre, error) {
-	var output []models.Genre
+	output := []models.Genre{}
 	sql := "SELECT id, name FROM genres;"
 
 	rows, err := r.db.Query(c, sql)

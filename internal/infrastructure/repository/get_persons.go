@@ -6,7 +6,7 @@ import (
 )
 
 func (r *repo) GetPersons(c context.Context) ([]models.Person, error) {
-	var output []models.Person
+	output := []models.Person{}
 	sql := "SELECT id, name FROM persons;"
 
 	rows, err := r.db.Query(c, sql)
