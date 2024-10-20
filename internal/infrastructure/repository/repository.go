@@ -14,6 +14,7 @@ type Repository interface {
 	Close()
 
 	GetOneByLink(c context.Context, bookLink string) (models.OneBook, error)
+	GetChapters(c context.Context, bookId int, endSorting bool) ([]models.Chapter, error)
 
 	GetBooks(c context.Context) ([]models.Book, error)
 	GetTypes(c context.Context) ([]models.BookType, error)

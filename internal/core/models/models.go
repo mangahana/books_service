@@ -44,3 +44,11 @@ type OneBook struct {
 	Status        string    `json:"status"`
 	ReleaseDate   time.Time `json:"release_date"`
 }
+
+type Chapter struct {
+	ID        string    `json:"id"`
+	Name      string    `json:"name"`
+	Volume    int       `json:"volume"`
+	Number    string    `json:"number"`
+	CreatedAt time.Time `json:"created_at"`
+}

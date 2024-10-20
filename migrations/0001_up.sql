@@ -39,9 +39,11 @@ CREATE TABLE chapters (
   id             TEXT UNIQUE NOT NULL,
   book_id        INTEGER NOT NULL,
   team_id        INTEGER NOT NULL,
+  team_name      TEXT NOT NULL,
   volume         INTEGER,
   chapter_number VARCHAR(10),
-  is_draft       BOOLEAN NOT NULL DEFAULT FALSE,
+  name           TEXT NOT NULL,
+  is_draft       BOOLEAN NOT NULL DEFAULT TRUE,
   created_at     TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
