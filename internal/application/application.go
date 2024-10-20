@@ -1,12 +1,15 @@
 package application
 
 import (
+	"books_service/internal/core/dto"
 	"books_service/internal/core/models"
 	"books_service/internal/infrastructure"
 	"context"
 )
 
 type UseCase interface {
+	Add(c context.Context, user models.User, dto dto.AddBook) error
+
 	GetBooks(c context.Context) ([]models.Book, error)
 	GetOneByLink(c context.Context, bookLink string) (models.OneBook, error)
 	GetChapters(c context.Context, bookId int, endSorting bool) ([]models.Chapter, error)
@@ -21,6 +24,8 @@ type UseCase interface {
 type useCase struct {
 	repo infrastructure.Repository
 	s3   infrastructure.Storage
+
+	teamsService infrastructure.TeamsService
 }
 
 func New(repo infrastructure.Repository) UseCase {
