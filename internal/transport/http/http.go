@@ -39,6 +39,7 @@ func (h *HttpServer) Register() {
 
 	api.GET("", controller.GetBooks)
 	api.GET("/chapters", controller.GetChapters)
+	api.GET("/pages", controller.GetPages)
 	api.GET("/types", controller.GetTypes)
 	api.GET("/persons", controller.GetPersons)
 	api.GET("/genres", controller.GetGenres)

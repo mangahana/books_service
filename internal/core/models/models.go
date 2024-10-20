@@ -52,3 +52,8 @@ type Chapter struct {
 	Number    string    `json:"number"`
 	CreatedAt time.Time `json:"created_at"`
 }
+
+type Page struct {
+	Number int    `json:"number"`
+	Image  string `json:"image"`
+}
