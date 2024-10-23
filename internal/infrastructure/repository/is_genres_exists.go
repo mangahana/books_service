@@ -5,7 +5,7 @@ import (
 	"context"
 )
 
-func (r *repo) IsGenresExists(c context.Context, arr []int) error {
+func (r *repo) IsGenresExists(c context.Context, arr []string) error {
 	var count int
 	sql := "SELECT count(id) FROM genres WHERE id = any($1);"
 

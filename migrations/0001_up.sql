@@ -5,35 +5,61 @@ CREATE TABLE books (
   original_title VARCHAR(50) NOT NULL,
   description    TEXT NOT NULL,
   poster         TEXT NOT NULL,
-  genres         INTEGER[] NOT NULL,
+  genres         TEXT[] NOT NULL,
   release_date   DATE NOT NULL,
-  type_id        INTEGER NOT NULL,
-  authors_ids    INTEGER[] NOT NULL,
-  artists_ids    INTEGER[] NOT NULL,
-  status_id      INTEGER NOT NULL,
+  type_id        TEXT NOT NULL,
+  authors_ids    TEXT[] NOT NULL,
+  artists_ids    TEXT[] NOT NULL,
+  formats_ids    TEXT[] NOT NULL,
+  status_id      TEXT NOT NULL,
   owner_team_id  INTEGER NOT NULL DEFAULT 0,
   created_at     TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE genres (
-  id   SERIAL PRIMARY KEY,
+  id   TEXT UNIQUE NOT NULL,
   name VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE types (
-  id   SERIAL PRIMARY KEY,
+  id   TEXT UNIQUE NOT NULL,
   name VARCHAR(50) NOT NULL
 );
+INSERT INTO types (id, name)
+VALUES 
+('manga', 'Маңга'),
+('manhwa', 'Манхуа'),
+('manhua', 'Мәңхуә'),
+('comics', 'Комикс');
+
+
+CREATE TABLE formats (
+  id   TEXT UNIQUE NOT NULL,
+  NAME VARCHAR(50) NOT NULL
+);
+INSERT INTO formats (id, name)
+VALUES 
+('oneshot', 'Уаншот'),
+('web-comic', 'Уеб комикс');
+
 
 CREATE TABLE statuses (
-  id   SERIAL PRIMARY KEY,
+  id   TEXT UNIQUE NOT NULL,
   name VARCHAR(50) NOT NULL
 );
+INSERT INTO statuses (id, name)
+VALUES
+('ongoing', 'Онгоиң'),
+('completed', 'Аяқталған'),
+('hiatus', 'Хиатус'),
+('canceled', 'Доғарылған');
+
 
 CREATE TABLE persons (
-  id    SERIAL PRIMARY KEY,
+  id    TEXT UNIQUE NOT NULL,
   name  VARCHAR(50) NOT NULL
 );
+
 
 CREATE TABLE chapters (
   id             TEXT UNIQUE NOT NULL,
@@ -44,11 +70,14 @@ CREATE TABLE chapters (
   chapter_number VARCHAR(10),
   name           TEXT NOT NULL,
   is_draft       BOOLEAN NOT NULL DEFAULT TRUE,
-  created_at     TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
+  created_at     TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_book FOREIGN KEY(book_id) REFERENCES books(id)
 );
+
 
 CREATE TABLE pages (
   chapter_id  TEXT NOT NULL,
   page_number INTEGER NOT NULL,
-  image       TEXT NOT NULL
+  image       TEXT NOT NULL,
+  CONSTRAINT fk_chapter FOREIGN KEY(chapter_id) REFERENCES chapters(id)
 );

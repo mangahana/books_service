@@ -5,9 +5,9 @@ import (
 	"context"
 )
 
-func (r *repo) IsPersonsExists(c context.Context, arr []string) error {
+func (r *repo) IsFormatExists(c context.Context, arr []string) error {
 	var count int
-	sql := "SELECT count(id) FROM persons WHERE id = any($1);"
+	sql := "SELECT count(id) FROM formats WHERE id = any($1);"
 
 	err := r.db.QueryRow(c, sql, arr).Scan(&count)
 	if err != nil {
@@ -18,5 +18,5 @@ func (r *repo) IsPersonsExists(c context.Context, arr []string) error {
 		return nil
 	}
 
-	return cerror.New(cerror.PERSONS_NOT_FOUND, "persons not found")
+	return cerror.New(cerror.FORMAT_NOT_FOUND, "format not found")
 }

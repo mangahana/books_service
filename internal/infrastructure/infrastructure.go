@@ -32,11 +32,13 @@ type Repository interface {
 	GetPersons(c context.Context) ([]models.Person, error)
 	GetGenres(c context.Context) ([]models.Genre, error)
 	GetStatuses(c context.Context) ([]models.Status, error)
+	GetFormats(c context.Context) ([]models.Format, error)
 
-	IsTypeExists(c context.Context, typeId int) error
-	IsStatusExists(c context.Context, statusId int) error
-	IsPersonsExists(c context.Context, arr []int) error
-	IsGenresExists(c context.Context, arr []int) error
+	IsTypeExists(c context.Context, typeId string) error
+	IsStatusExists(c context.Context, statusId string) error
+	IsPersonsExists(c context.Context, arr []string) error
+	IsGenresExists(c context.Context, arr []string) error
+	IsFormatExists(c context.Context, arr []string) error
 
 	// db connection close
 	Close()

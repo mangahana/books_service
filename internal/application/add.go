@@ -19,12 +19,16 @@ func (u *useCase) Add(c context.Context, user models.User, dto dto.AddBook) erro
 	if team.OwnerId != user.ID {
 		member, err := u.teamsService.GetMember(c, team.ID, user.ID)
 		if err != nil {
-			return cerror.New(cerror.FORBIDDEN, "you're not a team member'")
+			return cerror.New(cerror.FORBIDDEN, "you're not a team member")
 		}
 
 		if !slices.Contains(member.Permissions, CREATE_BOOK_PERMISSION) {
 			return cerror.New(cerror.FORBIDDEN, "you don't have permission")
 		}
+	}
+
+	if !team.IsModerated {
+		return cerror.New(cerror.TEAM_NOT_MODERATED, "this team is not moderated")
 	}
 
 	_, err = u.repo.GetOneByLink(c, dto.Link)
@@ -50,6 +54,9 @@ func (u *useCase) Add(c context.Context, user models.User, dto dto.AddBook) erro
 	}
 
 	if err := u.repo.IsTypeExists(c, dto.TypeId); err != nil {
+		return err
+	}
+	if err := u.repo.IsFormatExists(c, dto.Formats); err != nil {
 		return err
 	}
 

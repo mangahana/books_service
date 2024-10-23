@@ -3,22 +3,27 @@ package models
 import "time"
 
 type BookType struct {
-	ID   int    `json:"id"`
+	ID   string `json:"id"`
 	Name string `json:"name"`
 }
 
 type Person struct {
-	ID   int    `json:"id"`
+	ID   string `json:"id"`
+	Name string `json:"name"`
+}
+
+type Format struct {
+	ID   string `json:"id"`
 	Name string `json:"name"`
 }
 
 type Genre struct {
-	ID   int    `json:"id"`
+	ID   string `json:"id"`
 	Name string `json:"name"`
 }
 
 type Status struct {
-	ID   int    `json:"id"`
+	ID   string `json:"id"`
 	Name string `json:"name"`
 }
 
