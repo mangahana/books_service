@@ -31,11 +31,13 @@ func New(cfg *configuration.S3Config) (*storage, error) {
 }
 
 func (s *storage) Put(c context.Context, file []byte) (string, error) {
+	mimeType := http.DetectContentType(file)
+
 	opts := minio.PutObjectOptions{
-		ContentType: http.DetectContentType(file),
+		ContentType: mimeType,
 	}
 
-	exts, err := mime.ExtensionsByType("image/jpeg")
+	exts, err := mime.ExtensionsByType(mimeType)
 	if err != nil {
 		return "", err
 	}

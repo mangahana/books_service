@@ -2,6 +2,11 @@ package configuration
 
 import "github.com/Netflix/go-env"
 
+type ServicesConfig struct {
+	AuthServiceSocket  string `env:"AUTH_SERVICE_SOCKET"`
+	TeamsServiceSocket string `env:"TEAMS_SERVICE_SOCKET"`
+}
+
 type DBConfig struct {
 	Host string `env:"DB_HOST"`
 	User string `env:"DB_USER"`
@@ -23,9 +28,10 @@ type S3Config struct {
 }
 
 type Config struct {
-	DB     DBConfig
-	Server ServerConfig
-	S3     S3Config
+	DB       DBConfig
+	Server   ServerConfig
+	S3       S3Config
+	Services ServicesConfig
 }
 
 func Load() (*Config, error) {

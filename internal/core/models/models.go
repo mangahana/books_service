@@ -48,6 +48,7 @@ type OneBook struct {
 	Artists       []string  `json:"artists"`
 	Status        string    `json:"status"`
 	ReleaseDate   time.Time `json:"release_date"`
+	OwnerTeamID   int       `json:"owner_team_id"`
 }
 
 type Chapter struct {

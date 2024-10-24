@@ -9,6 +9,7 @@ import (
 
 type UseCase interface {
 	Add(c context.Context, user models.User, dto dto.AddBook) error
+	CreateDraft(c context.Context, user *models.User, dto *dto.CreateDraft) (string, error)
 
 	GetBooks(c context.Context) ([]models.Book, error)
 	GetOneByLink(c context.Context, bookLink string) (models.OneBook, error)
@@ -28,6 +29,9 @@ type useCase struct {
 	teamsService infrastructure.TeamsService
 }
 
-func New(repo infrastructure.Repository) UseCase {
-	return &useCase{repo: repo}
+func New(repo infrastructure.Repository, teamsService infrastructure.TeamsService) UseCase {
+	return &useCase{
+		repo:         repo,
+		teamsService: teamsService,
+	}
 }

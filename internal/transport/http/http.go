@@ -54,4 +54,5 @@ func (h *httpServer) Register() {
 	private := api.Group("", h.authenticateMiddleware)
 
 	private.POST("", controller.AddBook)
+	private.POST("/add_draft", controller.CreateDraft)
 }

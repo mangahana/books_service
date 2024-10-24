@@ -4,6 +4,11 @@ export
 run:
 	go run ./cmd/main.go
 
+proto_compile:
+	protoc --go_out=. --go_opt=paths=source_relative \
+			--go-grpc_out=. --go-grpc_opt=paths=source_relative \
+			proto/teams/teams.proto
+
 database_up:
 	docker run --name books-dev-db --rm \
 	-e POSTGRES_USER=${DB_USER} \

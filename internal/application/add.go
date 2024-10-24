@@ -11,7 +11,7 @@ import (
 const CREATE_BOOK_PERMISSION = "CREATE_BOOK_PERMISSION"
 
 func (u *useCase) Add(c context.Context, user models.User, dto dto.AddBook) error {
-	team, err := u.teamsService.GetTeam(c, dto.OwnerTeamID)
+	team, err := u.teamsService.GetOne(c, dto.OwnerTeamID)
 	if err != nil {
 		return err
 	}

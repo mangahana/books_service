@@ -7,11 +7,11 @@ import (
 )
 
 type AuthService interface {
-	Authenticate(c context.Context, token string) (models.User, error)
+	GetUser(c context.Context, token string) (models.User, error)
 }
 
 type TeamsService interface {
-	GetTeam(c context.Context, teamId int) (models.Team, error)
+	GetOne(c context.Context, teamId int) (models.Team, error)
 	GetMember(c context.Context, teamId, memberId int) (models.TeamMember, error)
 }
 
@@ -22,9 +22,12 @@ type Storage interface {
 
 type Repository interface {
 	CreateBook(c context.Context, dto *dto.AddBook) error
+	CreateDraft(c context.Context, memberId int, teamName string, dto *dto.CreateDraft) (string, error)
 
 	GetBooks(c context.Context) ([]models.Book, error)
 	GetOneByLink(c context.Context, bookLink string) (models.OneBook, error)
+	GetOneByID(c context.Context, id int) (models.OneBook, error)
+	GetDraftChapterID(c context.Context, memberId int, dto *dto.CreateDraft) (string, error)
 	GetChapters(c context.Context, bookId int, endSorting bool) ([]models.Chapter, error)
 	GetPages(c context.Context, chapterID string) ([]string, error)
 

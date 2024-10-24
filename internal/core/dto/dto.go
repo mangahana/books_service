@@ -15,3 +15,8 @@ type AddBook struct {
 	ReleaseDate   string   `json:"release_date" validate:"required,datetime"`
 	OwnerTeamID   int      `json:"owner_team_id"`
 }
+
+type CreateDraft struct {
+	BookID int `json:"book_id"`
+	TeamId int `json:"team_id"`
+}

@@ -66,9 +66,10 @@ CREATE TABLE chapters (
   book_id        INTEGER NOT NULL,
   team_id        INTEGER NOT NULL,
   team_name      TEXT NOT NULL,
-  volume         INTEGER,
-  chapter_number VARCHAR(10),
-  name           TEXT NOT NULL,
+  member_id      INTEGER NOT NULL ,
+  volume         INTEGER NOT NULL DEFAULT 0,
+  chapter_number VARCHAR(10) NOT NULL DEFAULT 0,
+  name           TEXT NOT NULL DEFAULT '',
   is_draft       BOOLEAN NOT NULL DEFAULT TRUE,
   created_at     TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT fk_book FOREIGN KEY(book_id) REFERENCES books(id)

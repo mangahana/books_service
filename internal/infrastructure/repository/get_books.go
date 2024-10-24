@@ -3,9 +3,11 @@ package repository
 import (
 	"books_service/internal/core/models"
 	"context"
+	"log"
 )
 
 func (r *repo) GetBooks(c context.Context) ([]models.Book, error) {
+	log.Println("here")
 	output := []models.Book{}
 	sql := `SELECT id, link, name, poster,
 					(SELECT name FROM types WHERE id = books.type_id) as type
