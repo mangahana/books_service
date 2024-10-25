@@ -17,12 +17,13 @@ type TeamsService interface {
 
 type Storage interface {
 	Put(c context.Context, file []byte) (string, error)
-	Remove(c context.Context) error
+	Remove(c context.Context, filename string) error
 }
 
 type Repository interface {
 	CreateBook(c context.Context, dto *dto.AddBook) error
 	CreateDraft(c context.Context, memberId int, teamName string, dto *dto.CreateDraft) (string, error)
+	AddPageToDraft(c context.Context, chapterID, page string) error
 
 	GetBooks(c context.Context) ([]models.Book, error)
 	GetOneByLink(c context.Context, bookLink string) (models.OneBook, error)
@@ -42,6 +43,7 @@ type Repository interface {
 	IsPersonsExists(c context.Context, arr []string) error
 	IsGenresExists(c context.Context, arr []string) error
 	IsFormatExists(c context.Context, arr []string) error
+	IsDraftExists(c context.Context, chapterID string, userID int) error
 
 	// db connection close
 	Close()

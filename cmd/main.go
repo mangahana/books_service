@@ -5,6 +5,7 @@ import (
 	"books_service/internal/core/configuration"
 	"books_service/internal/infrastructure/authorization"
 	"books_service/internal/infrastructure/repository"
+	"books_service/internal/infrastructure/s3"
 	"books_service/internal/infrastructure/teams"
 	"books_service/internal/transport/http"
 	"context"
@@ -36,7 +37,12 @@ func main() {
 		log.Fatal(err)
 	}
 
-	useCase := application.New(repo, teamService)
+	s3, err := s3.New(&cfg.S3)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	useCase := application.New(repo, teamService, s3)
 
 	httpServer := http.New(useCase, authService)
 	httpServer.Register()

@@ -18,6 +18,7 @@ func (r *repo) GetFormats(c context.Context) ([]models.Format, error) {
 		if err := rows.Scan(&f.ID, &f.Name); err != nil {
 			return output, err
 		}
+		output = append(output, f)
 	}
 
 	return output, nil

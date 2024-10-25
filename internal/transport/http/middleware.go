@@ -10,7 +10,7 @@ func (h *httpServer) authenticateMiddleware(next echo.HandlerFunc) echo.HandlerF
 	return func(c echo.Context) error {
 		token := c.Request().Header.Get("Authorization")
 		if token == "" {
-			return c.JSON(400, cerror.New(cerror.BAD_REQUEST, ""))
+			return c.JSON(400, cerror.New(cerror.BAD_REQUEST, "token is empty"))
 		}
 
 		user, err := h.authService.GetUser(c.Request().Context(), token)

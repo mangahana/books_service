@@ -45,14 +45,15 @@ func (h *httpServer) Register() {
 	api.GET("", controller.GetBooks)
 	api.GET("/chapters", controller.GetChapters)
 	api.GET("/pages", controller.GetPages)
-	api.GET("/types", controller.GetTypes)
 	api.GET("/persons", controller.GetPersons)
-	api.GET("/genres", controller.GetGenres)
-	api.GET("/statuses", controller.GetStatuses)
+
+	api.GET("/params", controller.GetParams)
 
 	//
 	private := api.Group("", h.authenticateMiddleware)
 
 	private.POST("", controller.AddBook)
 	private.POST("/add_draft", controller.CreateDraft)
+
+	private.PATCH("/upload_page", controller.UploadPage)
 }

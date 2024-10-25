@@ -20,6 +20,9 @@ CREATE TABLE genres (
   id   TEXT UNIQUE NOT NULL,
   name VARCHAR(50) NOT NULL
 );
+INSERT INTO genres (id, name)
+VALUES 
+('aciton', 'Экшн');
 
 CREATE TABLE types (
   id   TEXT UNIQUE NOT NULL,
@@ -70,15 +73,8 @@ CREATE TABLE chapters (
   volume         INTEGER NOT NULL DEFAULT 0,
   chapter_number VARCHAR(10) NOT NULL DEFAULT 0,
   name           TEXT NOT NULL DEFAULT '',
+  pages           TEXT[] NOT NULL DEFAULT '{}',
   is_draft       BOOLEAN NOT NULL DEFAULT TRUE,
   created_at     TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT fk_book FOREIGN KEY(book_id) REFERENCES books(id)
-);
-
-
-CREATE TABLE pages (
-  chapter_id  TEXT NOT NULL,
-  page_number INTEGER NOT NULL,
-  image       TEXT NOT NULL,
-  CONSTRAINT fk_chapter FOREIGN KEY(chapter_id) REFERENCES chapters(id)
 );

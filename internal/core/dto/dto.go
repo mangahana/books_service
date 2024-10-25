@@ -6,17 +6,31 @@ type AddBook struct {
 	OriginalTitle string   `json:"original_title" validate:"required"`
 	Description   string   `json:"descrpition" validate:"required"`
 	Poster        string   `json:"poster" validate:"required,base64"`
-	Genres        []string `json:"genres" validate:"required,dive,gte=1"`
-	Authors       []string `json:"authors" validate:"required,dive,gte=1"`
-	Artists       []string `json:"artists" validate:"required,dive,gte=1"`
-	Formats       []string `json:"formats" validate:"required,dive,gte=1"`
-	StatusId      string   `json:"status_id" validate:"required,dive,gte=1"`
-	TypeId        string   `json:"type_id" validate:"required,dive,gte=1"`
+	Genres        []string `json:"genres" validate:"required,dive"`
+	Authors       []string `json:"authors" validate:"required,dive"`
+	Artists       []string `json:"artists" validate:"required,dive"`
+	Formats       []string `json:"formats" validate:"required,dive"`
+	StatusId      string   `json:"status_id" validate:"required,dive"`
+	TypeId        string   `json:"type_id" validate:"required,dive"`
 	ReleaseDate   string   `json:"release_date" validate:"required,datetime"`
 	OwnerTeamID   int      `json:"owner_team_id"`
 }
 
 type CreateDraft struct {
-	BookID int `json:"book_id"`
-	TeamId int `json:"team_id"`
+	BookID int `json:"book_id" validate:"required,number,gte=1"`
+	TeamId int `json:"team_id" validate:"required,number,gte=1"`
+}
+
+type UploadPage struct {
+	ChapterID string `json:"chapter_id" validate:"required"`
+	Image     string `json:"image" validate:"required,base64"`
+}
+
+type CreateChapter struct {
+	ID     string   `json:"id"`
+	BookID int      `json:"book_id"`
+	Volume int      `json:"volume"`
+	Number string   `json:"number"`
+	Name   string   `json:"name"`
+	Pages  []string `json:"pages"`
 }
