@@ -59,7 +59,7 @@ VALUES
 
 
 CREATE TABLE persons (
-  id    TEXT UNIQUE NOT NULL,
+  id    SERIAL PRIMARY KEY,
   name  VARCHAR(50) NOT NULL
 );
 

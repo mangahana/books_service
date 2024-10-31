@@ -12,6 +12,7 @@ type UseCase interface {
 	Add(c context.Context, user models.User, dto dto.AddBook) error
 	CreateDraft(c context.Context, user *models.User, dto *dto.CreateDraft) (string, error)
 	UploadPage(c context.Context, user *models.User, dto *dto.UploadPage) (string, error)
+	AddPerson(c context.Context, person *dto.AddPerson) error
 
 	GetBooks(c context.Context) ([]models.Book, error)
 	GetOneByLink(c context.Context, bookLink string) (models.OneBook, error)
