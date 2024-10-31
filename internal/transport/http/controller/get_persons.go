@@ -7,10 +7,21 @@ import (
 )
 
 func (h *controller) GetPersons(c echo.Context) error {
-	persons, err := h.useCase.GetPersons(c.Request().Context())
+	name := c.QueryParam("name")
+	if name == "" {
+		persons, err := h.useCase.GetPersons(c.Request().Context())
+		if err != nil {
+			return c.JSON(500, cerror.New(cerror.INTERNAL_SERVER_ERROR, "unknow error"))
+		}
+
+		return c.JSON(200, persons)
+	}
+
+	persons, err := h.useCase.GetPersonsByName(c.Request().Context(), name)
 	if err != nil {
 		return c.JSON(500, cerror.New(cerror.INTERNAL_SERVER_ERROR, "unknow error"))
 	}
 
 	return c.JSON(200, persons)
+
 }
