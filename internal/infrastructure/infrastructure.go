@@ -38,6 +38,7 @@ type Repository interface {
 	GetGenres(c context.Context) ([]models.Genre, error)
 	GetStatuses(c context.Context) ([]models.Status, error)
 	GetFormats(c context.Context) ([]models.Format, error)
+	GetPersonsByName(c context.Context, name string) ([]models.Person, error)
 
 	IsTypeExists(c context.Context, typeId string) error
 	IsStatusExists(c context.Context, statusId string) error

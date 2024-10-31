@@ -20,6 +20,7 @@ type UseCase interface {
 	GetPages(c context.Context, chapterID string) ([]string, error)
 
 	GetPersons(c context.Context) ([]models.Person, error)
+	GetPersonsByName(c context.Context, name string) ([]models.Person, error)
 
 	GetParams(c context.Context) (map[string]any, error)
 }
