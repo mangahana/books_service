@@ -34,3 +34,8 @@ type CreateChapter struct {
 	Name   string   `json:"name"`
 	Pages  []string `json:"pages"`
 }
+
+type AddPerson struct {
+	ID   string `json:"id"`
+	Name string `json:"name"`
+}

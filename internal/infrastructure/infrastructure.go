@@ -24,6 +24,7 @@ type Repository interface {
 	CreateBook(c context.Context, dto *dto.AddBook) error
 	CreateDraft(c context.Context, memberId int, teamName string, dto *dto.CreateDraft) (string, error)
 	AddPageToDraft(c context.Context, chapterID, page string) error
+	AddPerson(c context.Context, person *dto.AddPerson) error
 
 	GetBooks(c context.Context) ([]models.Book, error)
 	GetOneByLink(c context.Context, bookLink string) (models.OneBook, error)
